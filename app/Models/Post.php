@@ -40,7 +40,7 @@ class Post extends Model
 
     public function scopePublished($query)
     {
-        return $query->where('is_published', true);
+        return $query->whereNotNull('publish_date');
     }
 
     protected static function booted()

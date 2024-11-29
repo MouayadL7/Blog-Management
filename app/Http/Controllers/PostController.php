@@ -22,7 +22,7 @@ class PostController extends Controller
 
     public function getPublishedPosts()
     {
-        $publishedPosts = $this->getPublishedPosts();
+        $publishedPosts = $this->postService->getPublishedPosts();
         
         return ResponseHelper::sendResponse($publishedPosts, 'Published posts retrieved successfully');
     }
@@ -50,6 +50,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
+        $this->authorize('update', $post);
+
         $this->postService->updatePost($request->toDTO(), $post);
 
         return ResponseHelper::sendResponse($post, 'Post updated successfully');
@@ -60,6 +62,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+        
         $this->postService->deletePost($post);
 
         return ResponseHelper::sendResponse([], 'Post deleted sucessfully');

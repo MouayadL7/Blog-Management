@@ -23,6 +23,6 @@ Route::prefix('posts')->controller(PostController::class)->group(function () {
         Route::get('/', 'getClientPosts');
         Route::post('/new_post', 'store');
         Route::put('/{post}', 'update');
-        Route::delete('/{post}', 'delete');
+        Route::delete('/{post}', 'destroy');
     });
 });
